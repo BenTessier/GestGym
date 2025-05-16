@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="GestGym" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="MyLocationX" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">50</Value>
+    </Setting>
+    <Setting Name="MyLocationY" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">50</Value>
+    </Setting>
+    <Setting Name="MyMaximized" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="MyWidth" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">1000</Value>
+    </Setting>
+    <Setting Name="MyHeight" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">800</Value>
+    </Setting>
+    <Setting Name="MyTheme" Type="System.String" Scope="User">
+      <Value Profile="(Default)">System</Value>
+    </Setting>
+    <Setting Name="SQLServerName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">HMSV-SQL01</Value>
+    </Setting>
+    <Setting Name="SQLServerDBName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">GestGym</Value>
+    </Setting>
+    <Setting Name="SQLAccount" Type="System.String" Scope="User">
+      <Value Profile="(Default)">GestGym_ADM</Value>
+    </Setting>
+    <Setting Name="SQLPassword" Type="System.String" Scope="User">
+      <Value Profile="(Default)">GestGym_ADM</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

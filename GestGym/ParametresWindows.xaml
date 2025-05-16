@@ -1,0 +1,268 @@
+<Window
+    x:Class="GestGym.ParametresWindows"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:GestGym"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="Paramètres de l'application"
+    Width="800"
+    Height="600"
+    ResizeMode="NoResize"
+    ScrollViewer.VerticalScrollBarVisibility="Auto"
+    mc:Ignorable="d">
+    <Window.Effect>
+        <DropShadowEffect />
+    </Window.Effect>
+    <Grid
+        Name="MainSetingsGrid"
+        Grid.Row="1"
+        Grid.Column="0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="62*" />
+            <ColumnDefinition Width="30*" />
+            <ColumnDefinition Width="101*" />
+            <ColumnDefinition Width="607*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!--  Section Apparence  -->
+        <Label
+            Grid.Row="1"
+            Grid.ColumnSpan="3"
+            Margin="50,0,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Content="Apparence" />
+        <Expander
+            Name="AppThemeExpander"
+            Grid.Row="2"
+            Grid.ColumnSpan="4"
+            Margin="50,0,50,0"
+            VerticalAlignment="Top"
+            Focusable="False"
+            IsExpanded="False">
+            <Expander.Header>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Label
+                        Grid.Column="0"
+                        Margin="10,10,10,10"
+                        Content="&#xE790;"
+                        FontFamily="Segoe Fluent Icons"
+                        FontSize="16" />
+                    <Grid Grid.Column="1" Margin="10,0,0,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" Content="Thème" />
+                        <Label
+                            Grid.Row="1"
+                            Padding="5,0,0,0"
+                            Content="Sélectionner le thème de l'application" />
+                    </Grid>
+                </Grid>
+            </Expander.Header>
+            <Expander.Content>
+                <StackPanel>
+                    <RadioButton
+                        Name="LightThemeRadio"
+                        Margin="60,0,0,0"
+                        Click="LightThemeRadioButton_Click"
+                        Content="Clair"
+                        FontFamily="Segoe UI Variable"
+                        FontSize="14"
+                        GroupName="ThemeGroup"
+                        IsChecked="False" />
+                    <RadioButton
+                        Name="DarkThemeRadio"
+                        Margin="60,5,0,0"
+                        Click="DarkThemeRadioButton_Click"
+                        Content="Foncé"
+                        FontFamily="Segoe UI Variable"
+                        FontSize="14"
+                        GroupName="ThemeGroup"
+                        IsChecked="False" />
+                    <RadioButton
+                        Name="SystemThemeRadio"
+                        Width="300"
+                        Margin="60,5,0,0"
+                        Click="SystemThemeRadioButton_Click"
+                        Content="Utiliser sélection du système"
+                        FontFamily="Segoe UI Variable"
+                        FontSize="14"
+                        GroupName="ThemeGroup"
+                        IsChecked="True" />
+                </StackPanel>
+            </Expander.Content>
+        </Expander>
+
+        <!--  Section Base de données SQL  -->
+        <Label
+            Grid.Row="3"
+            Grid.ColumnSpan="3"
+            Margin="50,20,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Content="Base de données" />
+        <Expander
+            Name="DatabaseExpander"
+            Grid.Row="4"
+            Grid.ColumnSpan="4"
+            Margin="50,0,50,0"
+            VerticalAlignment="Top"
+            Focusable="False"
+            IsExpanded="False">
+            <Expander.Header>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Label
+                        Grid.Column="0"
+                        Margin="10,10,10,10"
+                        Content="&#xE706;"
+                        FontFamily="Segoe Fluent Icons"
+                        FontSize="16" />
+                    <Grid Grid.Column="1" Margin="10,0,0,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" Content="Connexion SQL Server" />
+                        <Label
+                            Grid.Row="1"
+                            Padding="5,0,0,0"
+                            Content="Paramètres de connexion à la base de données" />
+                    </Grid>
+                </Grid>
+            </Expander.Header>
+            <Expander.Content>
+                <Grid Margin="60,10,10,10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="150" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <!--  Serveur SQL  -->
+                    <Label
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        VerticalAlignment="Center"
+                        Content="Serveur SQL:" />
+                    <TextBox
+                        Name="SQLServerNameTextBox"
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        Height="30"
+                        Margin="5"
+                        VerticalContentAlignment="Center" />
+
+                    <!--  Base de données  -->
+                    <Label
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        Margin="0,10,0,0"
+                        VerticalAlignment="Center"
+                        Content="Base de données:" />
+                    <TextBox
+                        Name="SQLDBNameTextBox"
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Height="30"
+                        Margin="5,10,5,0"
+                        VerticalContentAlignment="Center" />
+
+                    <!--  Compte SQL  -->
+                    <Label
+                        Grid.Row="2"
+                        Grid.Column="0"
+                        Margin="0,10,0,0"
+                        VerticalAlignment="Center"
+                        Content="Compte utilisateur:" />
+                    <TextBox
+                        Name="SQLAccountTextBox"
+                        Grid.Row="2"
+                        Grid.Column="1"
+                        Height="30"
+                        Margin="5,10,5,0"
+                        VerticalContentAlignment="Center" />
+
+                    <!--  Mot de passe SQL  -->
+                    <Label
+                        Grid.Row="3"
+                        Grid.Column="0"
+                        Margin="0,10,0,0"
+                        VerticalAlignment="Center"
+                        Content="Mot de passe:" />
+                    <PasswordBox
+                        Name="SQLPasswordBox"
+                        Grid.Row="3"
+                        Grid.Column="1"
+                        Height="30"
+                        Margin="5,10,5,0"
+                        VerticalContentAlignment="Center" />
+
+                    <!--  Bouton de sauvegarde  -->
+                    <Button
+                        Grid.Row="4"
+                        Grid.Column="1"
+                        Margin="0,20,5,10"
+                        Padding="10,5"
+                        HorizontalAlignment="Right"
+                        Click="SaveSQLSettings_Click"
+                        Content="Enregistrer les paramètres de connexion" />
+
+                    <!--  Bouton de test  -->
+                    <Button
+                        Grid.Row="4"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="1"
+                        Margin="0,20,0,10"
+                        Padding="10,5"
+                        HorizontalAlignment="Left"
+                        Click="TestSQLConnection_Click"
+                        Content="Tester la connexion" />
+                </Grid>
+            </Expander.Content>
+        </Expander>
+
+        <!--  Bouton Fermer  -->
+        <Button
+            Grid.Row="12"
+            Grid.Column="3"
+            Margin="0,20,50,10"
+            Padding="20,5"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Bottom"
+            Click="CloseButton_Click"
+            Content="Fermer" />
+    </Grid>
+</Window>

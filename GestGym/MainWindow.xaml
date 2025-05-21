@@ -1,40 +1,37 @@
 <!--
-===========================================
-DOCUMENTATION DE L'INTERFACE PRINCIPALE
-===========================================
-
-Fichier: MainWindow.xaml
-Description: Interface principale de l'application de gestion de Gym GestGym
-Type d'application: WPF (Windows Presentation Foundation)
-
-===========================================
-STRUCTURE ET COMPOSANTS PRINCIPAUX
-===========================================
+    ===========================================
+    DOCUMENTATION DE L'INTERFACE PRINCIPALE
+    ===========================================
+    
+    Fichier: MainWindow.xaml
+    Description: Interface principale de l'application de gestion de Gym GestGym
+    Type d'application: WPF (Windows Presentation Foundation)
+    
+    ===========================================
+    STRUCTURE ET COMPOSANTS PRINCIPAUX
+    ===========================================
 -->
 
 <!--
-Déclaration de la fenêtre principale avec ses namespaces, dimensions et événements associés
-- Name="GestGym": Identifiant utilisé dans le code-behind
-- Icon=".\images\gym.png": Icône de l'application
-- Initialized et Closing: Événements pour gérer la persistance des paramètres de la fenêtre
+    Déclaration de la fenêtre principale avec ses namespaces, dimensions et événements associés
+    - Name="GestGym": Identifiant utilisé dans le code-behind
+    - Icon=".\images\gym.png": Icône de l'application
+    - Initialized et Closing: Événements pour gérer la persistance des paramètres de la fenêtre
 -->
-<Window
-    x:Class="GestGym.MainWindow"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:GestGym"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Name="GestGym"
-    Title="Gestion du Gym Argenté"
-    Width="1200"
-    Height="1000"
-    Icon=".\images\gym.png"
-    mc:Ignorable="d">
+<Window x:Class="GestGym.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        Title="Gestion du Gym Argenté"
+        Width="1200"
+        Height="1000"
+        Icon=".\images\gym.png"
+        mc:Ignorable="d">
     <!--
-    Conteneur principal de type Grid avec 2 colonnes et 3 rangées:
-    - Colonnes: 177* (principale) et 23* (secondaire)
-    - Rangées: Auto (menu), * (contenu principal), Auto (barre de statut)
+        Conteneur principal de type Grid avec 2 colonnes et 3 rangées:
+        - Colonnes: 177* (principale) et 23* (secondaire)
+        - Rangées: Auto (menu), * (contenu principal), Auto (barre de statut)
     -->
     <Grid>
         <!--  Définition des colonnes du Grid  -->
@@ -55,13 +52,13 @@ Déclaration de la fenêtre principale avec ses namespaces, dimensions et évén
 
 
         <!--
-        ===========================================
-        BARRE DE MENU PRINCIPAL
-        ===========================================
-        Menu horizontal avec icônes et sous-menus
-        - Structure: 5 menus principaux, 4 alignés à gauche et 1 à droite
-        - Chaque menu a une icône au-dessus du texte
-        - Le DockPanel permet l'alignement à gauche/droite des éléments
+            ===========================================
+            BARRE DE MENU PRINCIPAL
+            ===========================================
+            Menu horizontal avec icônes et sous-menus
+            - Structure: 5 menus principaux, 4 alignés à gauche et 1 à droite
+            - Chaque menu a une icône au-dessus du texte
+            - Le DockPanel permet l'alignement à gauche/droite des éléments
         -->
 
         <Menu Grid.Row="0" Grid.ColumnSpan="2" VerticalAlignment="Top">
@@ -74,21 +71,18 @@ Déclaration de la fenêtre principale avec ses namespaces, dimensions et évén
             </Menu.ItemsPanel>
 
             <!--
-            ===========================================
-            1. MENU GESTION DES UTILISATEURS
-            ===========================================
-            Menu avec structure hiérarchique organisée en 3 sections:
-            - Gestion des utilisateurs
-            - Gestion des rôles
-            - Gestion des groupes
+                ===========================================
+                1. MENU GESTION DES UTILISATEURS
+                ===========================================
+                Menu avec structure hiérarchique organisée en 3 sections:
+                - Gestion des utilisateurs
+                - Gestion des rôles
+                - Gestion des groupes
             -->
             <MenuItem DockPanel.Dock="Left">
                 <MenuItem.Header>
                     <StackPanel HorizontalAlignment="Center" Orientation="Vertical">
-                        <Image
-                            Width="28"
-                            Height="28"
-                            Source=".\images\user.png" />
+                        <Image Width="28" Height="28" Source=".\images\user.png" />
                         <TextBlock HorizontalAlignment="Center" Text="Compte Utilisateurs" />
                     </StackPanel>
                 </MenuItem.Header>
@@ -97,70 +91,58 @@ Déclaration de la fenêtre principale avec ses namespaces, dimensions et évén
                 <MenuItem IsEnabled="False">
                     <MenuItem.Header>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock
-                                Margin="5,0"
-                                FontWeight="Bold"
-                                Text="------ GESTION DES UTILISATEURS ------" />
+                            <TextBlock Margin="5,0" FontWeight="Bold" Text="------ GESTION DES UTILISATEURS ------" />
                         </StackPanel>
                     </MenuItem.Header>
                 </MenuItem>
 
                 <!--  Actions pour les utilisateurs  -->
-                <MenuItem Name="ConsulterUtilisateur" Header="Consulter un compte" />
-                <MenuItem
-                    Name="AjouterUtilisateur"
-                    Click="AjouterUtilisateur_Click"
-                    Header="Ajouter un compte" />
-                <MenuItem Name="ModifierUtilisateur" Header="Modifier un compte" Click="ModifierUtilisateur_Click" />
+                <MenuItem Click="ConsulterUtilisateur_Click" Header="Consulter un compte" />
+                <MenuItem Click="AjouterUtilisateur_Click" Header="Ajouter un compte" />
+                <MenuItem Click="ModifierUtilisateur_Click" Header="Modifier un compte" />
 
 
                 <!--  Section Rôles avec titre séparateur décoratif  -->
                 <MenuItem IsEnabled="False">
                     <MenuItem.Header>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock
-                                Margin="5,0"
-                                FontWeight="Bold"
-                                Text=" ------ GESTION DES RÔLES ------" />
+                            <TextBlock Margin="5,0" FontWeight="Bold" Text=" ------ GESTION DES RÔLES ------" />
                         </StackPanel>
                     </MenuItem.Header>
                 </MenuItem>
 
                 <!--  Actions pour les rôles  -->
-                <MenuItem Name="ConsulterRole" Header="Consulter un rôle" />
-                <MenuItem Name="AjouterRole" Header="Ajouter un rôle" />
-                <MenuItem Name="ModifierRole" Header="Modifier un rôle" />
+                <MenuItem Header="Consulter un rôle" />
+                <MenuItem Header="Ajouter un rôle" />
+                <MenuItem Header="Modifier un rôle" />
 
 
                 <!--  Section Groupes avec titre séparateur décoratif  -->
                 <MenuItem IsEnabled="False">
                     <MenuItem.Header>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock
-                                Margin="5,0"
-                                FontWeight="Bold"
-                                Text=" ------ GESTION DES GROUPES ------" />
+                            <TextBlock Margin="5,0" FontWeight="Bold" Text=" ------ GESTION DES GROUPES ------" />
                         </StackPanel>
                     </MenuItem.Header>
                 </MenuItem>
 
                 <!--  Actions pour les groupes  -->
-                <MenuItem Name="ConsulterGroupe" Header="Consulter un groupe" />
-                <MenuItem Name="AjouterGroupe" Header="Ajouter un groupe" />
-                <MenuItem Name="ModifierGroupe" Header="Modifier un groupe" />
+                <MenuItem Header="Consulter un groupe" />
+                <MenuItem Header="Ajouter un groupe" />
+                <MenuItem Header="Modifier un groupe" />
             </MenuItem>
+
+
+
             <!--
-            ===========================================
-            2. MENU CLIENTS
-            ===========================================
+                ===========================================
+                2. MENU CLIENTS
+                ===========================================
             -->
             <MenuItem DockPanel.Dock="Left">
                 <MenuItem.Header>
                     <StackPanel HorizontalAlignment="Center" Orientation="Vertical">
-                        <Image
-                            Width="32"
-                            Height="32"
-                            Source=".\images\client.png" />
+                        <Image Width="32" Height="32" Source=".\images\client.png" />
                         <TextBlock HorizontalAlignment="Center" Text="Clients" />
                     </StackPanel>
                 </MenuItem.Header>
@@ -169,164 +151,116 @@ Déclaration de la fenêtre principale avec ses namespaces, dimensions et évén
                 <MenuItem IsEnabled="False">
                     <MenuItem.Header>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock
-                                Margin="5,0"
-                                FontWeight="Bold"
-                                Text=" ------ GESTION DES CLIENTS ------" />
+                            <TextBlock Margin="5,0" FontWeight="Bold" Text=" ------ GESTION DES CLIENTS ------" />
                         </StackPanel>
                     </MenuItem.Header>
                 </MenuItem>
 
                 <!--  Actions pour les clients  -->
-                <MenuItem Name="ConsulterClient" Header="Consulter un Client" />
-                <MenuItem Name="AjouterClient" Header="Ajouter un Client" />
-                <MenuItem Name="ModifierClient" Header="Modifier un Client" />
-                
+                <MenuItem Click="ConsulterClient_Click" Header="Consulter un Client" />
+                <MenuItem Click="AjouterClient_Click" Header="Ajouter un Client" />
+                <MenuItem Click="ModifierClient_Click" Header="Modifier un Client" />
+
 
                 <!--  Section Abonnements avec titre séparateur décoratif  -->
                 <MenuItem IsEnabled="False">
                     <MenuItem.Header>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock
-                                Margin="5,0"
-                                FontWeight="Bold"
-                                Text=" ------ GESTION DES ABONNEMENTS ------" />
+                            <TextBlock Margin="5,0" FontWeight="Bold" Text=" ------ GESTION DES ABONNEMENTS ------" />
                         </StackPanel>
                     </MenuItem.Header>
                 </MenuItem>
 
                 <!--  Actions pour les rôles  -->
-                <MenuItem Name="SelectPlan" Header="Sélectionner un plan" />
-                <MenuItem Name="AnnulerPlan" Header="Annuler un plan" />
-                <MenuItem Name="SelectOption" Header="Sélectionner une option" />
-                <MenuItem Name="AnnulerOption" Header="Annuler une option" />
+                <MenuItem Header="Sélectionner un abonnement" />
+                <MenuItem Header="Sélectionner une option" />
 
                 <!--  Section Groupes avec titre séparateur décoratif  -->
                 <MenuItem IsEnabled="False">
                     <MenuItem.Header>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock
-                                Margin="5,0"
-                                FontWeight="Bold"
-                                Text=" ------ GESTION DES RENDEZ-VOUS ------" />
+                            <TextBlock Margin="5,0" FontWeight="Bold" Text=" ------ GESTION DES RENDEZ-VOUS ------" />
                         </StackPanel>
                     </MenuItem.Header>
                 </MenuItem>
 
                 <!--  Actions pour les rendez-vous  -->
-                <MenuItem Name="ConsulterRendezVous" Header="Consulter un Rendez-vous" />
-                <MenuItem Name="AjouterRendezVous" Header="Ajouter un Rendez-vous" />
-                <MenuItem Name="ModifierRendezVous" Header="Modifier un Rendez-vous" />
-                <MenuItem Name="SupprimerRendezVous" Header="Supprimer un Rendez-vous" />
+                <MenuItem Header="Consulter un Rendez-vous" />
+                <MenuItem Header="Ajouter un Rendez-vous" />
+                <MenuItem Header="Modifier un Rendez-vous" />
+                <MenuItem Header="Supprimer un Rendez-vous" />
             </MenuItem>
+
+
+
+
             <!--
-            ===========================================
-            3. MENU CALENDRIER
-            ===========================================
-            Menu pour la gestion du calendrier (à développer)
+                ===========================================
+                3. MENU CALENDRIER
+                ===========================================
+                Menu pour la gestion du calendrier (à développer)
             -->
             <MenuItem DockPanel.Dock="Left">
 
                 <MenuItem.Header>
                     <StackPanel HorizontalAlignment="Center" Orientation="Vertical">
-                        <Image
-                            Width="32"
-                            Height="32"
-                            Source=".\images\calendar.png" />
+                        <Image Width="32" Height="32" Source=".\images\calendar.png" />
                         <TextBlock HorizontalAlignment="Center" Text="Calendrier" />
                     </StackPanel>
                 </MenuItem.Header>
 
                 <!--  Actions pour les calendriers  -->
-                <MenuItem Name="ConsulterMonCalendrier" Header="Consulter mon calendrier" />
-                <MenuItem Name="ConsulterCalendrier" Header="Consulter un calendrier" />
-                <MenuItem Name="AjouterRendezVous2" Header="Ajouter un Rendez-vous" />
-                <MenuItem Name="ModifierRendezVous2" Header="Modifier un Rendez-vous" />
-                <MenuItem Name="SupprimerRendezVous2" Header="Supprimer un Rendez-vous" />
+                <MenuItem Header="Consulter mon calendrier" />
+                <MenuItem Header="Consulter un calendrier" />
+                <MenuItem Header="Ajouter un Rendez-vous" />
+                <MenuItem Header="Modifier un Rendez-vous" />
+                <MenuItem Header="Supprimer un Rendez-vous" />
             </MenuItem>
+
+
+
+
             <!--
-            ===========================================
-            4. MENU PLAN ET OPTIONS
-            ===========================================
+                ===========================================
+                4. MENU PLAN ET OPTIONS
+                ===========================================
             -->
 
 
             <MenuItem DockPanel.Dock="Left">
                 <MenuItem.Header>
                     <StackPanel HorizontalAlignment="Center" Orientation="Vertical">
-                        <Image
-                            Width="32"
-                            Height="32"
-                            Source=".\images\plans.png" />
+                        <Image Width="32" Height="32" Source=".\images\plans.png" />
                         <TextBlock HorizontalAlignment="Center" Text="Plan et Options" />
                     </StackPanel>
                 </MenuItem.Header>
 
-                <!--  Section avec titre séparateur décoratif  -->
-                <MenuItem IsEnabled="False">
-                    <MenuItem.Header>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock
-                                Margin="5,0"
-                                FontWeight="Bold"
-                                Text=" ------ GESTION DES PLANS ------" />
-                        </StackPanel>
-                    </MenuItem.Header>
-                </MenuItem>
-
-                <MenuItem Name="ConsulterPlan" Header="Afficher un plan" />
-                <MenuItem Name="AjouterPlan" Header="Ajouter/Créer un plan" />
-                <MenuItem Name="AnnulerPlan2" Header="Annuler un plan" />
-
-                <!--  Section Groupes avec titre séparateur décoratif  -->
-                <MenuItem IsEnabled="False">
-                    <MenuItem.Header>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock
-                                Margin="5,0"
-                                FontWeight="Bold"
-                                Text=" ------ GESTION DES OPTIONS ------" />
-                        </StackPanel>
-                    </MenuItem.Header>
-                </MenuItem>
-
-                <MenuItem Name="ConsulterOption" Header="Afficher une option" />
-                <MenuItem Name="AjouterOption" Header="Ajouter/Créer une option" />
-                <MenuItem Name="AnnulerOption2" Header="Annuler une option" />
+                <MenuItem Name="GererPlan" Header="Gérer les plans" />
+                <MenuItem Name="GererOption" Header="Gérer les options" />
             </MenuItem>
 
             <!--
-            ===========================================
-            5. MENU PROFIL (ALIGNÉ À DROITE)
-            ===========================================
-            Menu pour la gestion du profil utilisateur (à développer)
-            Utilise DockPanel.Dock="Right" pour l'alignement à droite
+                ===========================================
+                5. MENU PROFIL (ALIGNÉ À DROITE)
+                ===========================================
+                Menu pour la gestion du profil utilisateur (à développer)
+                Utilise DockPanel.Dock="Right" pour l'alignement à droite
             -->
             <MenuItem DockPanel.Dock="Right">
                 <MenuItem.Header>
                     <StackPanel HorizontalAlignment="Center" Orientation="Vertical">
-                        <Image
-                            Width="32"
-                            Height="32"
-                            Source=".\images\profile.png" />
+                        <Image Width="32" Height="32" Source=".\images\profile.png" />
                         <TextBlock HorizontalAlignment="Center" Text="Mon profil" />
                     </StackPanel>
                 </MenuItem.Header>
 
-                <MenuItem
-                    Name="Parametres"
-                    Click="Parametres_Click"
-                    Header="Parametres" />
-                <MenuItem Name="Quitter" Header="Fermer la session" />
+                <MenuItem Name="Parametres" Click="Parametres_Click" Header="Paramêtres" />
+                <MenuItem Name="Quitter" />
             </MenuItem>
         </Menu>
 
 
         <!--  Zone de contenu dynamique  -->
-        <ContentControl
-            x:Name="DynamicContent"
-            Grid.Row="1"
-            Grid.ColumnSpan="2"
-            Margin="0,10,0,0" />
+        <ContentControl x:Name="DynamicContent" Grid.Row="1" Grid.ColumnSpan="2" Margin="0,10,0,0" />
     </Grid>
 </Window>

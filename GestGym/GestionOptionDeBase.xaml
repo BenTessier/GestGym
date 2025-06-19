@@ -1,0 +1,111 @@
+<UserControl x:Class="GestGym.GestionOptionDeBase" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+
+        <!--  Style pour le DataGrid  -->
+        <Style x:Key="CustomDataGridStyle" TargetType="DataGrid">
+            <Setter Property="AlternatingRowBackground" Value="#F0F0F0" />
+            <Setter Property="HorizontalGridLinesBrush" Value="#DDDDDD" />
+            <Setter Property="RowBackground" Value="White" />
+            <Setter Property="VerticalGridLinesBrush" Value="#DDDDDD" />
+        </Style>
+
+        <!--  Style pour les lignes du DataGrid  -->
+        <Style x:Key="CustomRowStyle" TargetType="DataGridRow">
+            <Style.Triggers>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="#000099" />
+                    <!--  Bleu  -->
+                    <Setter Property="Foreground" Value="White" />
+                    <!--  Texte blanc  -->
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!--  Style pour les cellules ComboBox  -->
+        <Style x:Key="CustomComboBoxStyle" TargetType="ComboBox">
+            <Setter Property="Background" Value="#000099" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ComboBox">
+                        <Grid>
+                            <ToggleButton Name="ToggleButton" ClickMode="Press" Focusable="False" IsChecked="{Binding Path=IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" Template="{StaticResource ComboBoxToggleButtonTemplate}" />
+                            <ContentPresenter Name="ContentSite" Margin="8,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Content="{TemplateBinding SelectionBoxItem}" ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}" ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}" IsHitTestVisible="False" />
+                            <Popup Name="Popup" AllowsTransparency="True" Focusable="False" IsOpen="{TemplateBinding IsDropDownOpen}" Placement="Bottom" PopupAnimation="Slide">
+                                <Grid Name="DropDown" MinWidth="{TemplateBinding ActualWidth}" MaxHeight="{TemplateBinding MaxDropDownHeight}" SnapsToDevicePixels="True">
+                                    <Border x:Name="DropDownBorder" Background="White" BorderBrush="Gray" BorderThickness="1" />
+                                    <ScrollViewer Margin="4,6,4,6" SnapsToDevicePixels="True">
+                                        <ItemsPresenter KeyboardNavigation.DirectionalNavigation="Contained" />
+                                    </ScrollViewer>
+                                </Grid>
+                            </Popup>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!--  Template pour le bouton du ComboBox  -->
+        <ControlTemplate x:Key="ComboBoxToggleButtonTemplate" TargetType="ToggleButton">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="20" />
+                </Grid.ColumnDefinitions>
+                <Border x:Name="Border" Grid.ColumnSpan="2" Background="White" BorderBrush="#ABADB3" BorderThickness="1" />
+                <Border x:Name="ButtonBorder" Grid.Column="1" Background="Transparent" BorderBrush="Transparent" BorderThickness="0,0,0,0" />
+                <Path x:Name="Arrow" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Data="M0,0 L5,5 L10,0 Z" Fill="Black" />
+            </Grid>
+        </ControlTemplate>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Margin="0,0,0,8" Orientation="Horizontal">
+            <Button Margin="0,0,8,0" HorizontalAlignment="Left" Click="SauvegarderButton_Click" Content="Sauvegarder" />
+            <Button HorizontalAlignment="Left" Click="AnnulerButton_Click" Content="Fermer sans sauvegarder" />
+        </StackPanel>
+
+        <DataGrid x:Name="OptionsDataGrid" 
+                  Grid.Row="1" 
+                  Margin="10" 
+                  AutoGenerateColumns="False" 
+                  CanUserAddRows="True" 
+                  CanUserDeleteRows="False" 
+                  IsReadOnly="False" 
+                  RowEditEnding="OptionsDataGrid_RowEditEnding"
+                  InitializingNewItem="OptionsDataGrid_InitializingNewItem">
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="*" Binding="{Binding Nom}" Header="Nom" />
+                <DataGridTextColumn Width="200" Binding="{Binding Description}" Header="Description" />
+                <DataGridTextColumn Width="80" Binding="{Binding Prix}" Header="Prix" />
+                <DataGridTextColumn Width="120" Binding="{Binding Horaire}" Header="Horaire" />
+                <DataGridTextColumn Width="80" Binding="{Binding NbreSeance}" Header="Nombre de Séances" />
+                <DataGridTextColumn Width="110" Binding="{Binding DateDebutDisponible}" Header="Date Début" />
+                <DataGridTextColumn Width="110" Binding="{Binding DateFinDisponible}" Header="Date Fin" />
+                <DataGridComboBoxColumn x:Name="FrequenceComboBox" Width="120" DisplayMemberPath="Frequence" Header="Fréquence" ItemsSource="{Binding DataContext.Frequences, RelativeSource={RelativeSource AncestorType=UserControl}}" SelectedValueBinding="{Binding REF_Frequence_ID, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="Frequence_id">
+                    <DataGridComboBoxColumn.ElementStyle>
+                        <Style TargetType="ComboBox">
+                            <Setter Property="Background" Value="White" />
+                            <Setter Property="Foreground" Value="Black" />
+                        </Style>
+                    </DataGridComboBoxColumn.ElementStyle>
+                    <DataGridComboBoxColumn.EditingElementStyle>
+                        <Style TargetType="ComboBox">
+                            <Setter Property="Background" Value="White" />
+                            <Setter Property="BorderBrush" Value="#ABADB3" />
+                            <Setter Property="BorderThickness" Value="1" />
+                            <Setter Property="Foreground" Value="Black" />
+                        </Style>
+                    </DataGridComboBoxColumn.EditingElementStyle>
+                </DataGridComboBoxColumn>
+                <DataGridTextColumn Width="50" Binding="{Binding Statut}" Header="Statut" />
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>

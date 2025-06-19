@@ -1,0 +1,33 @@
+<UserControl x:Class="GestGym.GestionPlanDeBase" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Margin="0,0,0,8" Orientation="Horizontal">
+            <Button Margin="0,0,8,0" HorizontalAlignment="Left" Click="SauvegarderButton_Click" Content="Sauvegarder" />
+            <Button HorizontalAlignment="Left" Click="AnnulerButton_Click" Content="Fermer sans sauvegarder" />
+        </StackPanel>
+
+        <DataGrid x:Name="PlansDataGrid" 
+                  Grid.Row="1" 
+                  AutoGenerateColumns="False" 
+                  BeginningEdit="PlansDataGrid_BeginningEdit" 
+                  RowEditEnding="PlansDataGrid_RowEditEnding"
+                  InitializingNewItem="PlansDataGrid_InitializingNewItem">
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="*" Binding="{Binding Nom}" Header="Nom" />
+                <DataGridTextColumn Width="200" Binding="{Binding Notes}" Header="Notes" />
+                <DataGridTextColumn Width="80" Binding="{Binding Prix}" Header="Prix" />
+                <DataGridTextColumn Width="80" Binding="{Binding Duree}" Header="Durée" />
+                <DataGridTextColumn Width="110" Binding="{Binding DateDebutDisponible}" Header="Date Début" />
+                <DataGridTextColumn Width="110" Binding="{Binding DateFinDisponible}" Header="Date Fin" />
+                <DataGridTextColumn Width="50" Binding="{Binding Statut}" Header="Statut" />
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>

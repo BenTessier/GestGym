@@ -1,0 +1,29 @@
+<!--  SQLLoginWindow.xaml  -->
+<Window x:Class="GestGym.SQLLoginWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Title="Connexion SQL Administrateur" Width="400" Height="500" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Margin="0,0,0,20" TextAlignment="Center" TextWrapping="Wrap">
+            Veuillez entrer les informations d'identification d'un compte SQL Server avec des privilèges administrateur.
+            Ces informations seront utilisées uniquement pour réinitialiser la base de données.
+        </TextBlock>
+
+        <Label Grid.Row="1" Content="Nom d'utilisateur SQL:" />
+        <TextBox Name="SQLUsernameTextBox" Grid.Row="2" Margin="0,5,0,10" Padding="5" Text="sa" />
+
+        <Label Grid.Row="3" Content="Mot de passe SQL:" />
+        <PasswordBox Name="SQLPasswordBox" Grid.Row="4" Margin="0,5,0,20" Padding="5" />
+
+        <StackPanel Grid.Row="5" HorizontalAlignment="Right" Orientation="Horizontal">
+            <Button Width="100" Margin="0,0,10,0" Padding="5" Click="CancelButton_Click" Content="Annuler" IsCancel="True" />
+            <Button Width="100" Padding="5" Click="OkButton_Click" Content="Connexion" IsDefault="True" />
+        </StackPanel>
+    </Grid>
+</Window>

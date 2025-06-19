@@ -1,3 +1,10 @@
+/*********************************************************************
+ * FICHIER:        GestionUtilisateur.xaml.cs
+ * DESCRIPTION:    Contrôle utilisateur pour la gestion des utilisateurs
+ * DATE:           Juin 2025
+ * AUTEUR:         Benoit Tessier
+ *********************************************************************/
+
 using System.Data;
 using System.Windows;
 using System.Windows.Controls;
@@ -7,6 +14,10 @@ using System.Windows.Media;
 
 namespace GestGym;
 
+/// <summary>
+///     Contrôle utilisateur permettant l'ajout, la modification et la consultation
+///     des utilisateurs du système GestGym.
+/// </summary>
 public partial class GestionUtilisateur : UserControl
 {
     private readonly Controller _controller;
@@ -14,20 +25,28 @@ public partial class GestionUtilisateur : UserControl
     private readonly bool _readOnly;
     private int? _utilisateurId;
 
+    /*********************************************************************
+     * CONSTRUCTEUR: GestionUtilisateur
+     * DESCRIPTION:  Initialise le contrôle utilisateur et configure le mode
+     *               d'affichage selon les paramètres fournis
+     * PARAMÈTRES:   controller - Instance du contrôleur de l'application
+     *               modeModification - Indique si le mode est en modification
+     *               readOnly - Indique si le mode est en lecture seule
+     *********************************************************************/
     public GestionUtilisateur(Controller controller, bool modeModification, bool readOnly)
     {
         InitializeComponent();
         _controller = controller;
         _modeModification = modeModification;
-        InitializeComponent();
         _readOnly = readOnly;
-
 
         // Configuration selon le mode
         ConfigurerMode();
 
         // Charger les listes déroulantes
         ChargerRolesEtGroupes();
+
+        if (!_modeModification && !_readOnly) DatePicker.SelectedDate = DateTime.Today;
 
         // Si mode modification, ajouter le gestionnaire d'événement pour la recherche
         if (TitreTextBlock.Text == "CONSULTER UN UTILISATEUR" || TitreTextBlock.Text == "MODIFIER UN UTILISATEUR")
@@ -40,6 +59,11 @@ public partial class GestionUtilisateur : UserControl
             SetFieldsReadOnly();
     }
 
+    /*********************************************************************
+     * MÉTHODE:      SetFieldsReadOnly
+     * DESCRIPTION:  Configure tous les champs du formulaire en mode
+     *               lecture seule
+     *********************************************************************/
     private void SetFieldsReadOnly()
     {
         // Parcourez tous les champs et mettez-les en lecture seule
@@ -55,6 +79,11 @@ public partial class GestionUtilisateur : UserControl
         BtnAction.IsEnabled = false;
     }
 
+    /*********************************************************************
+     * MÉTHODE:      ConfigurerMode
+     * DESCRIPTION:  Configure l'interface utilisateur selon le mode actif
+     *               (consultation, modification ou ajout)
+     *********************************************************************/
     private void ConfigurerMode()
     {
         if (_readOnly)
@@ -88,6 +117,11 @@ public partial class GestionUtilisateur : UserControl
         }
     }
 
+    /*********************************************************************
+     * MÉTHODE:      ChargerRolesEtGroupes
+     * DESCRIPTION:  Charge les rôles et groupes depuis la base de données
+     *               et les affiche dans les listes déroulantes
+     *********************************************************************/
     private void ChargerRolesEtGroupes()
     {
         // Charger les rôles
@@ -111,6 +145,13 @@ public partial class GestionUtilisateur : UserControl
         groupes.Rows.InsertAt(emptyGroupeRow, 0);
     }
 
+    /*********************************************************************
+     * MÉTHODE:      BtnRechercher_Click
+     * DESCRIPTION:  Recherche un utilisateur selon les critères saisis
+     *               et affiche ses informations dans le formulaire
+     * PARAMÈTRES:   sender - Source de l'événement
+     *               e - Arguments de l'événement
+     *********************************************************************/
     private void BtnRechercher_Click(object sender, RoutedEventArgs e)
     {
         var recherche = RechercheTextBox.Text.Trim();
@@ -129,8 +170,7 @@ public partial class GestionUtilisateur : UserControl
             return;
         }
 
-        var statut = 1;
-        int.TryParse(row["Statut"]?.ToString(), out statut);
+        if (!int.TryParse(row["Statut"]?.ToString(), out var statut)) statut = 1; // Default value if parsing fails
         StatutActifRadio.IsChecked = statut == 1;
         StatutInactifRadio.IsChecked = statut == 2;
         _utilisateurId = Convert.ToInt32(row["Id"]);
@@ -145,8 +185,7 @@ public partial class GestionUtilisateur : UserControl
         NotesRichTextBox.Document.Blocks.Add(new Paragraph(new Run(row["Notes"]?.ToString() ?? "")));
 
         // Ajout pour la sélection de rôle et groupe
-        int Role_id;
-        if (int.TryParse(row["REF_Roles_id"]?.ToString(), out Role_id))
+        if (int.TryParse(row["REF_Roles_id"]?.ToString(), out var Role_id))
 
             // Sélectionner le rôle correspondant
             foreach (DataRowView rowView in RoleComboBox.Items)
@@ -156,12 +195,11 @@ public partial class GestionUtilisateur : UserControl
                     break;
                 }
 
-        int Groupe_id;
-        if (int.TryParse(row["REF_Groupes_id"]?.ToString(), out Groupe_id))
+        if (int.TryParse(row["REF_Groupes_id"]?.ToString(), out var Groupe_id))
 
             // Sélectionner le groupe correspondant
             foreach (DataRowView rowView in GroupeComboBox.Items)
-                if (rowView["Groupe_id"] != DBNull.Value && Convert.ToInt32(rowView["Groupe_id"]) == Role_id)
+                if (rowView["Groupe_id"] != DBNull.Value && Convert.ToInt32(rowView["Groupe_id"]) == Groupe_id)
                 {
                     GroupeComboBox.SelectedItem = rowView;
                     break;
@@ -170,6 +208,13 @@ public partial class GestionUtilisateur : UserControl
         FormPanel.Visibility = Visibility.Visible;
     }
 
+    /*********************************************************************
+     * MÉTHODE:      BtnAction_Click
+     * DESCRIPTION:  Gère l'action principale du formulaire (ajout ou
+     *               modification) selon le mode actif
+     * PARAMÈTRES:   sender - Source de l'événement
+     *               e - Arguments de l'événement
+     *********************************************************************/
     private void BtnAction_Click(object sender, RoutedEventArgs e)
     {
         if (_modeModification && _utilisateurId == null)
@@ -204,9 +249,11 @@ public partial class GestionUtilisateur : UserControl
         int? Role_id = null;
         int? Groupe_id = null;
 
-        if (RoleComboBox.SelectedItem != null && RoleComboBox.SelectedValue != null && RoleComboBox.SelectedValue != DBNull.Value) Role_id = Convert.ToInt32(((DataRowView)RoleComboBox.SelectedItem)["Role_id"]);
+        if (RoleComboBox.SelectedItem != null && RoleComboBox.SelectedValue != null && RoleComboBox.SelectedValue != DBNull.Value)
+            Role_id = Convert.ToInt32(((DataRowView)RoleComboBox.SelectedItem)["Role_id"]);
 
-        if (GroupeComboBox.SelectedItem != null && GroupeComboBox.SelectedValue != null && GroupeComboBox.SelectedValue != DBNull.Value) Groupe_id = Convert.ToInt32(((DataRowView)GroupeComboBox.SelectedItem)["Groupe_id"]);
+        if (GroupeComboBox.SelectedItem != null && GroupeComboBox.SelectedValue != null && GroupeComboBox.SelectedValue != DBNull.Value)
+            Groupe_id = Convert.ToInt32(((DataRowView)GroupeComboBox.SelectedItem)["Groupe_id"]);
 
         // Récupérer le texte des notes
         var textRange = new TextRange(
@@ -218,19 +265,28 @@ public partial class GestionUtilisateur : UserControl
         {
             // Mode modification
             var statut = StatutActifRadio.IsChecked == true ? 1 : 2;
-            var success = _controller.ModifierUtilisateur(
-                _utilisateurId.Value,
-                nom,
-                telephone,
-                numEmploye, courriel,
-                identifiant,
-                motDePasse,
-                dateInscription,
-                notes,
-                statut,
-                Role_id,
-                Groupe_id
-            );
+            if (_utilisateurId.HasValue)
+            {
+                _controller.ModifierUtilisateur(
+                    _utilisateurId.Value,
+                    nom,
+                    telephone,
+                    numEmploye,
+                    courriel,
+                    identifiant,
+                    motDePasse,
+                    dateInscription,
+                    notes,
+                    statut,
+                    Role_id,
+                    Groupe_id
+                );
+            }
+            else
+            {
+                MessageBox.Show("Aucun utilisateur sélectionné.", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
         }
         else
         {
@@ -252,6 +308,12 @@ public partial class GestionUtilisateur : UserControl
         ReinitialiserFormulaire();
     }
 
+    /*********************************************************************
+     * MÉTHODE:      BtnAnnuler_Click
+     * DESCRIPTION:  Annule l'opération en cours et ferme le formulaire
+     * PARAMÈTRES:   sender - Source de l'événement
+     *               e - Arguments de l'événement
+     *********************************************************************/
     private void BtnAnnuler_Click(object sender, RoutedEventArgs e)
     {
         // Réinitialiser le formulaire dans tous les cas
@@ -275,17 +337,25 @@ public partial class GestionUtilisateur : UserControl
         }
     }
 
-    // Méthode pour trouver le ContentControl parent
-    private ContentControl FindParentContentControl()
+    /*********************************************************************
+     * MÉTHODE:      FindParentContentControl
+     * DESCRIPTION:  Recherche le ContentControl parent dans l'arbre visuel
+     * RETOUR:       Le ContentControl parent ou null si non trouvé
+     *********************************************************************/
+    private ContentControl? FindParentContentControl()
     {
-        DependencyObject parent = this;
+        DependencyObject? parent = this;
 
         // Remonter la hiérarchie visuelle jusqu'à trouver un ContentControl
-        while (parent != null && !(parent is ContentControl)) parent = VisualTreeHelper.GetParent(parent);
+        while (parent is not null and not ContentControl) parent = VisualTreeHelper.GetParent(parent);
 
         return parent as ContentControl;
     }
 
+    /*********************************************************************
+     * MÉTHODE:      ReinitialiserFormulaire
+     * DESCRIPTION:  Réinitialise tous les champs du formulaire
+     *********************************************************************/
     private void ReinitialiserFormulaire()
     {
         NomTextBox.Clear();

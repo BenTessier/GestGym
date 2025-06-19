@@ -74,7 +74,7 @@
                 <PasswordBox x:Name="MotDePasseTextBox" Grid.Row="8" Grid.Column="1" Grid.ColumnSpan="2" Height="30" />
 
                 <!--  Champ Date  -->
-                <TextBlock Grid.Row="9" Grid.Column="0" Margin="0,10,5,0" VerticalAlignment="Center" Text="Date :" />
+                <TextBlock Grid.Row="9" Grid.Column="0" Margin="0,10,5,0" VerticalAlignment="Center" Text="Date d'arrivée :" />
                 <DatePicker x:Name="DatePicker" Grid.Row="9" Grid.Column="1" Grid.ColumnSpan="2" Height="30" IsTodayHighlighted="True" SelectedDateFormat="Short" />
 
                 <!--  Champ Rôle  -->

@@ -11,6 +11,7 @@
     <Title>GestGym pour Windows</Title>
     <Authors>Benoit Tessier</Authors>
     <PackageIcon>gym.png</PackageIcon>
+    <Configurations>Debug;Release</Configurations>
   </PropertyGroup>
 
   <ItemGroup>
@@ -29,10 +30,13 @@
     <None Remove="images\settings.png" />
     <None Remove="images\user.png" />
     <None Remove="images\view.png" />
+    <None Remove="Scripts\DeleteDatabase.sql" />
+    <None Remove="Scripts\ResetDatabase.sql" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="GestionOptionDeBase.xaml" />
+    <EmbeddedResource Include="Scripts\DeleteDatabase.sql" />
+    <EmbeddedResource Include="Scripts\ResetDatabase.sql" />
   </ItemGroup>
 
   <ItemGroup>
@@ -95,8 +99,20 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="PremierParametres.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Settings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
 

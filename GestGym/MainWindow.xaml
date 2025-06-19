@@ -24,8 +24,6 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         Title="Gestion du Gym Argenté"
-        Width="1200"
-        Height="1000"
         Icon=".\images\gym.png"
         mc:Ignorable="d">
     <!--
@@ -100,36 +98,6 @@
                 <MenuItem Click="ConsulterUtilisateur_Click" Header="Consulter un compte" />
                 <MenuItem Click="AjouterUtilisateur_Click" Header="Ajouter un compte" />
                 <MenuItem Click="ModifierUtilisateur_Click" Header="Modifier un compte" />
-
-
-                <!--  Section Rôles avec titre séparateur décoratif  -->
-                <MenuItem IsEnabled="False">
-                    <MenuItem.Header>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Margin="5,0" FontWeight="Bold" Text=" ------ GESTION DES RÔLES ------" />
-                        </StackPanel>
-                    </MenuItem.Header>
-                </MenuItem>
-
-                <!--  Actions pour les rôles  -->
-                <MenuItem Header="Consulter un rôle" />
-                <MenuItem Header="Ajouter un rôle" />
-                <MenuItem Header="Modifier un rôle" />
-
-
-                <!--  Section Groupes avec titre séparateur décoratif  -->
-                <MenuItem IsEnabled="False">
-                    <MenuItem.Header>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Margin="5,0" FontWeight="Bold" Text=" ------ GESTION DES GROUPES ------" />
-                        </StackPanel>
-                    </MenuItem.Header>
-                </MenuItem>
-
-                <!--  Actions pour les groupes  -->
-                <MenuItem Header="Consulter un groupe" />
-                <MenuItem Header="Ajouter un groupe" />
-                <MenuItem Header="Modifier un groupe" />
             </MenuItem>
 
 
@@ -162,20 +130,7 @@
                 <MenuItem Click="ModifierClient_Click" Header="Modifier un Client" />
 
 
-                <!--  Section Abonnements avec titre séparateur décoratif  -->
-                <MenuItem IsEnabled="False">
-                    <MenuItem.Header>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Margin="5,0" FontWeight="Bold" Text=" ------ GESTION DES ABONNEMENTS ------" />
-                        </StackPanel>
-                    </MenuItem.Header>
-                </MenuItem>
-
-                <!--  Actions pour les rôles  -->
-                <MenuItem Header="Sélectionner un abonnement" />
-                <MenuItem Header="Sélectionner une option" />
-
-                <!--  Section Groupes avec titre séparateur décoratif  -->
+                <!--  Section Rendez-vous avec titre séparateur décoratif  -->
                 <MenuItem IsEnabled="False">
                     <MenuItem.Header>
                         <StackPanel Orientation="Horizontal">
@@ -235,8 +190,8 @@
                     </StackPanel>
                 </MenuItem.Header>
 
-                <MenuItem Name="GererPlan" Header="Gérer les plans" />
-                <MenuItem Name="GererOption" Header="Gérer les options" />
+                <MenuItem Click="GererPlansBaseButton_Click" Header="Gérer les plans" />
+                <MenuItem Click="GererOptionsBaseButton_Click" Header="Gérer les options" />
             </MenuItem>
 
             <!--

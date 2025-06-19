@@ -9,7 +9,7 @@
       <Value Profile="(Default)">50</Value>
     </Setting>
     <Setting Name="MyMaximized" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
+      <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="MyWidth" Type="System.Double" Scope="User">
       <Value Profile="(Default)">1000</Value>
@@ -18,7 +18,7 @@
       <Value Profile="(Default)">800</Value>
     </Setting>
     <Setting Name="MyTheme" Type="System.String" Scope="User">
-      <Value Profile="(Default)">System</Value>
+      <Value Profile="(Default)">Light</Value>
     </Setting>
     <Setting Name="SQLServerName" Type="System.String" Scope="User">
       <Value Profile="(Default)">HMSV-SQL01</Value>
@@ -30,7 +30,10 @@
       <Value Profile="(Default)">GestGym_ADM</Value>
     </Setting>
     <Setting Name="SQLPassword" Type="System.String" Scope="User">
-      <Value Profile="(Default)">GestGym_ADM</Value>
+      <Value Profile="(Default)">YQISl2clkPFVA*p%HhpR*5J5</Value>
+    </Setting>
+    <Setting Name="RunNumber" Type="System.String" Scope="User">
+      <Value Profile="(Default)">0</Value>
     </Setting>
   </Settings>
 </SettingsFile>

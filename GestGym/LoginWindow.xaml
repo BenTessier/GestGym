@@ -35,6 +35,6 @@
             <TextBlock x:Name="ErreurTextBlock" Margin="0,10,0,0" HorizontalAlignment="Center" Foreground="Red" TextWrapping="Wrap" Visibility="Collapsed" />
         </StackPanel>
 
-        <TextBlock Grid.Row="2" Margin="0,0,0,10" HorizontalAlignment="Center" Foreground="#666" Text="© 2025 GestGym" />
+        <TextBlock Grid.Row="2" Margin="0,0,0,10" HorizontalAlignment="Center" Foreground="#666" Text="© 2025 Benoit Tessier" />
     </Grid>
 </Window>

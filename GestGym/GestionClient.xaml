@@ -24,6 +24,8 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <!--  Titre sur toute la largeur  -->
@@ -57,8 +59,50 @@
                 <TextBlock Grid.Row="10" Grid.Column="0" Margin="0,10,5,0" VerticalAlignment="Top" Text="Notes :" />
                 <RichTextBox x:Name="NotesRichTextBox" Grid.Row="10" Grid.Column="1" Grid.ColumnSpan="3" Height="100" Margin="0,10,0,10" />
 
+                <!--  Remplacement de la section Abonnement  -->
+                <Border Grid.Row="11" Grid.ColumnSpan="5" Margin="0,20,0,0" Padding="10" BorderBrush="#CCCCCC" BorderThickness="1" CornerRadius="5">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <!--  Titre de la section  -->
+                        <TextBlock Grid.Row="0" Margin="0,0,0,15" FontSize="16" FontWeight="Bold" Text="Abonnements" />
+
+                        <!--  DataGrid pour les abonnements  -->
+                        <DataGrid x:Name="AbonnementsDataGrid" Grid.Row="1" Height="150" Margin="0,0,0,10" AutoGenerateColumns="False" CanUserAddRows="True" CanUserDeleteRows="True">
+                            <DataGrid.Columns>
+                                <DataGridComboBoxColumn x:Name="PlanColumn" Width="*" DisplayMemberPath="Nom" Header="Plan" SelectedValueBinding="{Binding REF_PlanDeBase_ID}" SelectedValuePath="Id" />
+                                <DataGridTemplateColumn Width="*" Header="Date début">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <DatePicker SelectedDate="{Binding DateDebut, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedDateFormat="Short" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Width="*" Header="Date fin">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <DatePicker SelectedDate="{Binding DateFin, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedDateFormat="Short" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridCheckBoxColumn Width="60" Binding="{Binding Statut}" Header="Actif" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+
+                        <!--  Boutons pour gérer les abonnements  -->
+                        <StackPanel Grid.Row="2" Margin="0,5,0,0" HorizontalAlignment="Right" Orientation="Horizontal">
+                            <Button Content="Effacer" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="10" Click="EffacerAbonnementButton_Click" />
+                        </StackPanel>
+                    </Grid>
+                </Border>
+
                 <!--  Boutons  -->
-                <StackPanel Grid.Row="11" Margin="0,20,0,0" HorizontalAlignment="Center" Orientation="Horizontal">
+                <StackPanel Grid.Row="12" Margin="0,20,0,0" HorizontalAlignment="Center" Orientation="Horizontal">
                     <Button x:Name="BtnAction" Width="120" Height="35" Margin="0,0,10,0" Click="BtnAction_Click" />
                     <Button x:Name="BtnAnnuler" Width="120" Height="35" Click="BtnAnnuler_Click" Content="Annuler" />
                 </StackPanel>
